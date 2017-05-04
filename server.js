@@ -13,11 +13,19 @@ app.listen(8080, function () {
 app.get('/:query', function(req, res) {
     console.log(req.params.query);
     // make variable to store timestamp and date query
-    var date = req.params.query;
+    var q = req.params.query;
     
     // make array of months
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 
     'July', 'August', 'September', 'October', 'November', 'December'];
+    
+    // make container to send data as response
+    var response = {};
+    
+    // condition that makes new date if query is a number
+    if(!NaN(q)) {
+        var date = new Date(q * 1000);
+    }
     
     
     // if string has both timestamp and date 
