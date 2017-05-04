@@ -23,18 +23,22 @@ app.get('/:time', function(req, res) {
     var response = {};
     
     // condition that makes new date if query is a number
-    if(!NaN(q)) {
+    if(!isNaN(q)) {
         var date = new Date(q * 1000);
     }
     
     // make container for time string
     var time = (isNaN(q) ? q : `${months[date.getMonth()]} ${String(date.getDate())}, ${String(date.getFullYear())}`)
-    
-    
-    
-    // if string has both timestamp and date 
-        // return both
-    // else
+    // if string has no timestamp and date 
+    if(!new Date(time)) {
         // return null
-    res.send('null');
+      response.unix = null;
+      response.natural = null;
+    } else {
+        // return timestamp and date
+      response.unix = Date.parse(time) / 1000;
+      response.natural = time;
+    }
+    
+    res.send(response);
 })
