@@ -1,9 +1,9 @@
 var express = require('express')
 var app = express()
 
-// app.get('/', function (req, res) {
-//   res.send('Hello World!')
-// });
+app.get('/', function (req, res) {
+  res.send('Hello World');
+});
 
 app.listen(8080, function () {
   console.log('Example app listening on port 8080!')
@@ -32,6 +32,7 @@ app.get('/:time', function(req, res) {
     // if string has no timestamp and date 
     if(!new Date(time)) {
         // return null
+        console.log('inside watever');
       response.unix = null;
       response.natural = null;
     } else {
@@ -40,5 +41,5 @@ app.get('/:time', function(req, res) {
       response.natural = time;
     }
     
-    res.send(response);
+    res.json(response);
 })
