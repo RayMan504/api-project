@@ -10,10 +10,10 @@ app.listen(8080, function () {
 });
 
 // pass in unix timestamp or language date
-app.get('/:query', function(req, res) {
-    console.log(req.params.query);
+app.get('/:time', function(req, res) {
+    console.log(req.params.time);
     // make variable to store timestamp and date query
-    var q = req.params.query;
+    var q = req.params.time;
     
     // make array of months
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 
@@ -26,6 +26,10 @@ app.get('/:query', function(req, res) {
     if(!NaN(q)) {
         var date = new Date(q * 1000);
     }
+    
+    // make container for time string
+    var time = (isNaN(q) ? q : `${months[date.getMonth()]} ${String(date.getDate())}, ${String(date.getFullYear())}`)
+    
     
     
     // if string has both timestamp and date 
