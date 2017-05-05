@@ -30,7 +30,7 @@ app.get('/:time', function(req, res) {
     // make container for time string
     var time = (isNaN(q)) ? q : `${months[date.getMonth()]} ${String(date.getDate())}, ${String(date.getFullYear())}`;
     // if string has no timestamp and date 
-    if(new Date(time)) {
+    if(new Date(time) == 'Invalid Date') {
       response.unix = null;
       response.natural = null;
     } else {
